@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raízes do Nordeste | Restaurante e Comida Caseira</title>
+    
+    <!-- Vínculo do PWA (Manifest) -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fontes do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Topo / Header -->
+    <header class="header">
+        <div class="logo">🌵 Raízes do Nordeste</div>
+        <div class="unidade-select">
+            <label for="select-unidade">Unidade:</label>
+            <select id="select-unidade" onchange="alterarUnidade()">
+                <option value="centro">Unidade Centro</option>
+                <option value="shopping">Unidade Shopping</option>
+                <option value="zona-sul">Unidade Zona Sul</option>
+            </select>
+        </div>
+        <div class="fidelidade-badge">
+            ⭐ <span id="fidelidade-pontos">150</span> pts
+        </div>
+
+        <!-- Botão de Cadastro no Header -->
+        <div class="user-badge" onclick="abrirModalCadastro()" style="cursor: pointer; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; color: white; font-size: 0.9rem;">
+            👤 <span id="header-user-nome">Entrar / Cadastrar</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Banner LGPD -->
+        <div id="lgpd-banner" class="lgpd-banner">
+            <p>🔒 Respeitamos sua privacidade. Utilizamos cookies para personalizar seu pedido e gerenciar seu programa de fidelidade conforme a LGPD.</p>
+            <button onclick="aceitarLGPD()">Aceitar e Continuar</button>
+        </div>
+
+        <!-- Navegação por Abas -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="trocarAba('inicio', event)">Início</button>
+            <button class="tab-btn" onclick="trocarAba('sobre', event)">Sobre Nós</button>
+            <button class="tab-btn" onclick="trocarAba('cardapio', event)">Cardápio</button>
+            <button class="tab-btn" onclick="trocarAba('carrinho', event)">Carrinho (<span id="cart-count">0</span>)</button>
+            <button class="tab-btn" onclick="trocarAba('status', event)">Acompanhar Pedido</button>
+        </div>
+
+        <!-- Seção: Página Inicial (Home) -->
+        <section id="sec-inicio" class="section active">
+            <div class="hero-banner">
+                <div class="hero-action">
+                    <button class="btn-hero" onclick="irParaCardapio()">Fazer Pedido Agora</button>
+                </div>
+            </div>
+
+            <div class="destaques-grid">
+                <div class="destaque-card">
+                    <h3>Receitas Tradicionais</h3>
+                    <p>Sabores autênticos do Nordeste preparados com carinho e tradição.</p>
+                </div>
+                <div class="destaque-card">
+                    <h3>Ingredientes Selecionados</h3>
+                    <p>Produtos frescos e de fornecedores locais da melhor qualidade.</p>
+                </div>
+                <div class="destaque-card">
+                    <h3>Sabor Caseiro</h3>
+                    <p>Tempero caseiro de verdade em cada prato do nosso cardápio.</p>
+                </div>
+            </div>
+
+            <div class="unidades-info">
+                <h2>Nossas Unidades</h2>
+                <p>Visite-nos ou peça online para receber no conforto da sua casa:</p>
+                <ul>
+                    <li><strong>Unidade Centro:</strong> Rua Principal, 100 - Centro</li>
+                    <li><strong>Unidade Shopping:</strong> Av. das Compras, 500 - Praça de Alimentação</li>
+                    <li><strong>Unidade Zona Sul:</strong> Av. Beira Mar, 1200 - Zona Sul</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção: Sobre Nós -->
+        <section id="sec-sobre" class="section">
+            <div class="sobre-container">
+                <div class="sobre-hero">
+                    <div class="sobre-hero-text">
+                        <h2>Nossa História</h2>
+                        <span class="subtitulo-sobre">Quando a Tradição Encontra a Inovação</span>
+                        <p>Nascida do carinho familiar no Recife, a <strong>Raízes do Nordeste</strong> une o sabor autêntico da comida caseira à praticidade da tecnologia moderna.</p>
+                    </div>
+                    <div class="sobre-hero-img">
+                        <img src="imagens/hero-banner.png" alt="Dona Francisca e Família">
+                    </div>
+                </div>
+
+                <div class="metricas-grid">
+                    <div class="metrica-card">
+                        <h3>+6 Anos</h3>
+                        <p>De tradição e sabor</p>
+                    </div>
+                    <div class="metrica-card">
+                        <h3>3 Unidades</h3>
+                        <p>Em locais estratégicos</p>
+                    </div>
+                    <div class="metrica-card">
+                        <h3>+50 mil</h3>
+                        <p>Cuscuzes servidos</p>
+                    </div>
+                </div>
+
+                <div class="historia-cards">
+                    <div class="historia-card">
+                        <div class="card-icon">🌵</div>
+                        <h3>Do Coração do Recife</h3>
+                        <p>O cheiro do cuscuz quentinho e o café passado na hora marcam nossa origem. O que começou como um sonho familiar de Dona Francisca e seus dois filhos, hoje é uma rede amada por milhares de clientes.</p>
+                    </div>
+
+                    <div class="historia-card">
+                        <div class="card-icon">☀️</div>
+                        <h3>Nossa Missão</h3>
+                        <p>Conectar a riqueza da culinária ancestral ao ritmo do dia a dia urbano. Servimos tapiocas, cuscuz recheado e doces tradicionais com agilidade, sem perder a identidade cultural.</p>
+                    </div>
+
+                    <div class="historia-card">
+                        <div class="card-icon">🚀</div>
+                        <h3>Tradição e Futuro</h3>
+                        <p>Inovamos no atendimento com totens, site moderno e programa de fidelidade. No entanto, o tempero caseiro e a hospitalidade nordestina continuam sendo nosso ingrediente principal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Cardápio -->
+        <section id="sec-cardapio" class="section">
+            <h2>Nosso Cardápio</h2>
+            <div id="grid-cardapio" class="grid-cardapio"></div>
+        </section>
+
+        <!-- Seção: Carrinho -->
+        <section id="sec-carrinho" class="section">
+            <h2>Seu Carrinho</h2>
+            <div id="itens-carrinho"></div>
+            
+            <div class="resumo-checkout">
+                <h3>Resumo do Pedido</h3>
+                <p>Subtotal: R$ <span id="subtotal-val">0.00</span></p>
+                <p>Desconto Fidelidade: -R$ <span id="desconto-val">0.00</span></p>
+                <h4>Total: R$ <span id="total-val">0.00</span></h4>
+
+                <div class="fidelidade-opt">
+                    <input type="checkbox" id="usar-pontos" onchange="calcularTotal()">
+                    <label for="usar-pontos">Usar 100 pontos para R$ 10,00 de desconto</label>
+                </div>
+
+                <button class="btn-finalizar" onclick="trocarAba('pagamento', event)">Avançar para o Pagamento</button>
+            </div>
+        </section>
+
+        <!-- Seção: Pagamento / Checkout -->
+        <section id="sec-pagamento" class="section">
+            <h2>Finalizar Pedido</h2>
+            <div class="checkout-container">
+                <form id="form-pagamento-final" onsubmit="processarPagamento(event)">
+                    <h3>Dados de Identificação</h3>
+                    <div class="form-group">
+                        <label for="cliente-nome">Nome Completo:</label>
+                        <input type="text" id="cliente-nome" required placeholder="Digite seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-telefone">Telefone / WhatsApp:</label>
+                        <input type="tel" id="cliente-telefone" required placeholder="(81) 99999-9999">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-cpf">CPF (apenas números):</label>
+                        <input 
+                            type="text" 
+                            id="cliente-cpf" 
+                            required 
+                            placeholder="000.000.000-00" 
+                            maxlength="14" 
+                            oninput="mascararCPF(this)"
+                        >
+                        <small class="lgpd-note">🔒 *Seu CPF é utilizado estritamente para emissão de nota fiscal e programa de fidelidade (LGPD).*</small>
+                    </div>
+
+                    <h3>Forma de Pagamento</h3>
+                    <select id="metodo-pagamento" onchange="alternarCamposPagamento()" required>
+                        <option value="pix">PIX (Aprovação Instantânea)</option>
+                        <option value="cartao">Cartão de Crédito</option>
+                    </select>
+
+                    <div id="pix-container" class="metodo-detalhe" style="display: block;">
+                        <p>Escaneie o QR Code abaixo ou copie a chave PIX para realizar o pagamento:</p>
+                        <div class="qrcode-placeholder">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=RaizesDoNordestePixFake" alt="QR Code PIX">
+                        </div>
+                        <div class="pix-copia-cola">
+                            <input type="text" id="pix-key" value="00020126360014BR.GOV.BCB.PIX0114+5581999999999520400005303986" readonly>
+                            <button type="button" onclick="copiarPix()">Copiar Código PIX</button>
+                        </div>
+                    </div>
+
+                    <div id="cartao-container" class="metodo-detalhe" style="display: none;">
+                        <label for="card-num">Número do Cartão:</label>
+                        <input type="text" id="card-num" placeholder="0000 0000 0000 0000" maxlength="19">
+                        
+                        <div style="display: flex; gap: 10px; margin-top: 10px;">
+                            <div style="flex: 1;">
+                                <label for="card-val">Validade:</label>
+                                <input type="text" id="card-val" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="card-cvv">CVV:</label>
+                                <input type="text" id="card-cvv" placeholder="123" maxlength="4">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-pagar" id="btn-confirmar-pag">Pagar e Confirmar Pedido</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Seção: Status do Pedido -->
+        <section id="sec-status" class="section">
+            <h2>Acompanhamento do Pedido</h2>
+
+            <div id="tracker-container">
+                <div class="status-tracker">
+                    <div class="step" id="st-1">1. Recebido</div>
+                    <div class="step" id="st-2">2. Em Preparo</div>
+                    <div class="step" id="st-3">3. Pronto para Retirada</div>
+                </div>
+
+                <div class="pedido-info">
+                    <p><strong>Pedido nº:</strong> <span id="pedido-id">#0000</span></p>
+                    <p><strong>Cliente:</strong> <span id="pedido-cliente">-</span></p>
+                    <p><strong>Unidade:</strong> <span id="pedido-unidade">-</span></p>
+                    <p><strong>PIN Gerado (Teste):</strong> <span id="pin-exibicao" style="font-weight: bold; color: var(--cor-principal);">----</span></p>
+                    <p>
+                        <a id="btn-whatsapp-notif" href="#" target="_blank" style="display:none; margin-top:15px; padding:10px 15px; background-color:#25D366; color:white; text-decoration:none; border-radius:5px; font-weight:bold;">
+                            📱 Receber atualizações e PIN no WhatsApp
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Caixinha de Validação do Código PIN -->
+                <div class="confirmacao-entrega-box">
+                    <h3>🔑 Confirmação de Entrega / Retirada</h3>
+                    <p>Digite abaixo o PIN de 4 dígitos enviado ao seu WhatsApp/Comprovante para confirmar a entrega:</p>
+                    
+                    <div style="margin: 15px 0;">
+                        <input 
+                            type="text" 
+                            id="input-pin-cliente" 
+                            placeholder="0000" 
+                            maxlength="4" 
+                            style="width: 140px; text-align: center; font-size: 1.5rem; font-weight: bold; letter-spacing: 4px; padding: 8px; border-radius: 8px; border: 2px solid #ccc;"
+                        >
+                    </div>
+
+                    <button id="btn-validar-pin" onclick="validarPINDigitado()" style="background-color: var(--cor-sucesso); padding: 10px 20px;">
+                        ✅ Confirmar Entrega
+                    </button>
+
+                    <p id="erro-pin-msg" style="color: var(--cor-principal); font-weight: bold; margin-top: 10px; display: none;">
+                        ❌ PIN incorreto! Verifique o código e tente novamente.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mensagem Final quando a Entrega é Confirmada -->
+            <div id="status-sucesso-container" class="status-sucesso-container" style="display: none;">
+                <div class="sucesso-icon">🎉</div>
+                <h2>Pedido Entregue com Sucesso!</h2>
+                <p>Obrigado por escolher o <strong>Raízes do Nordeste</strong>. Bom apetite! 🌵😋</p>
+                <button class="btn-novo-pedido" onclick="location.reload()">Fazer Novo Pedido</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Cadastro do Cliente -->
+    <div id="modal-cadastro" class="modal" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 25px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <h3 style="margin-bottom: 15px; color: var(--cor-principal);">👤 Cadastro do Cliente</h3>
+            <form onsubmit="salvarCadastroModal(event)">
+                <div style="margin-bottom: 12px;">
+                    <label style="display:block; font-size: 0.85rem; font-weight:bold;">Nome Completo:</label>
+                    <input type="text" id="modal-nome" required placeholder="Digite seu nome" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px;">
+                </div>
+                <div style="margin-bottom: 12px;">
+                    <label style="display:block; font-size: 0.85rem; font-weight:bold;">Telefone / WhatsApp:</label>
+                    <input type="tel" id="modal-telefone" required placeholder="(81) 99999-9999" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display:block; font-size: 0.85rem; font-weight:bold;">CPF:</label>
+                    <input type="text" id="modal-cpf" required placeholder="000.000.000-00" maxlength="14" oninput="mascararCPF(this)" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px; margin-top:4px;">
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button type="submit" style="flex:1; background: var(--cor-sucesso); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Salvar</button>
+                    <button type="button" onclick="fecharModalCadastro()" style="background:#6c757d; color:white; border:none; padding:10px; border-radius:6px; cursor:pointer;">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
